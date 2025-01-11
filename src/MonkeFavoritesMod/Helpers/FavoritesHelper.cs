@@ -18,7 +18,7 @@ public static class FavoritesHelper
 
     private static Sprite? _icon;
 
-    private static List<string> _favorites;
+    private static List<string> _favorites = new();
     private static List<GameObject> _items = new();
 
     public static void AddSubIconToSlot(GameObject slut, string? item)
