@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using HarmonyLib;
 using UnityEngine.UI;
 
 namespace MonkeFavoritesMod.Helpers;
@@ -18,6 +19,7 @@ public static class FavoritesHelper
     private static Sprite? _icon;
 
     private static List<string> _favorites;
+    private static List<GameObject> _items;
 
     public static void AddSubIconToSlot(GameObject slut, string? item)
     {
@@ -37,6 +39,7 @@ public static class FavoritesHelper
         transform.anchorMin = transform.anchorMax = Vector2.one;
         transform.sizeDelta = new Vector2(16f, 16f);
         subIcon.SetActive(ShouldBeMarked(item));
+        _items.Add(slut);
     }
 
     public static void SetSubIconActive(GameObject slut, string? item)
@@ -56,20 +59,46 @@ public static class FavoritesHelper
 
     public static void AddFavorite(string item)
     {
-        if(!_favorites?.Contains(item) ?? false) {
+        if (!_favorites?.Contains(item) ?? false)
+        {
             _favorites?.Add(item);
+            Refresh(item);
         }
     }
 
     public static void RemoveFavorite(string item)
     {
-        if(_favorites?.Contains(item) ?? false) {
+        if (_favorites?.Contains(item) ?? false)
+        {
             _favorites?.Remove(item);
+            Refresh(item);
         }
     }
 
-    public static void SetFavorites(List<string> favorites) {
+    public static void SetFavorites(List<string> favorites)
+    {
         _favorites = favorites;
+        _items = new();
+    }
+
+    private static void Refresh(string itemName)
+    {
+        foreach (GameObject slut in _items)
+        {
+            if (slut.GetComponent<ItemSlot>() is ItemSlot slot && slot.Item?.Id == itemName)
+            {
+                SetSubIconActive(slut, itemName);
+                continue;
+            }
+            if (slut.GetComponent<ItemTooltipHandler>() is ItemTooltipHandler handler)
+            {
+                if (new Traverse(handler).Field("_item").GetValue() is BasePickupItem item && item.Id == itemName)
+                {
+                    SetSubIconActive(slut, itemName);
+                    continue;
+                }
+            }
+        }
     }
 
 }

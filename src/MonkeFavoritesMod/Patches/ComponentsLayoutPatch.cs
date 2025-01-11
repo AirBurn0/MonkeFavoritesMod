@@ -27,7 +27,14 @@ class ComponentsLayoutPatch
     static void SerializeGlobalComponentsPrefix(State ____state, JSONNode rootNode)
     {
         JSONNode asArray = rootNode["Components"].AsArray;
-        asArray.Add(SaveToJSON.CreateNode(____state.Get<Favorites>()));
+        asArray.Add(AlterSaveNode(SaveToJSON.CreateNode(____state.Get<Favorites>())));
+    }
+
+    private static JSONNode AlterSaveNode(JSONNode node)
+    {
+        node["ModType"] = node["Type"];
+        node["Type"] = typeof(MGSC.NewsEvent).FullName;
+        return node;
     }
 
     [HarmonyPatch(nameof(ComponentsLayout.DeserializeGlobalComponents), new[] { typeof(JSONNode) }), HarmonyPostfix]
@@ -42,10 +49,10 @@ class ComponentsLayoutPatch
         Dictionary<Type, JSONNode> typesToNodes = new Dictionary<Type, JSONNode>();
         for (int i = jsonNode["Components"].Count - 1; i >= 0; --i)
         {
-            string type = jsonNode["Components"][i]["Type"];
-            if (!type.Contains("MonkeFavoritesMod."))
+            string type = jsonNode["Components"][i]["ModType"];
+            if (type is null || !type.Contains("MonkeFavoritesMod."))
                 continue;
-            typesToNodes.Add(typeof(MonkeFavoritesMod).Assembly.GetType(jsonNode["Components"][i]["Type"]), jsonNode["Components"][i]["Content"]);
+            typesToNodes.Add(typeof(MonkeFavoritesMod).Assembly.GetType(type), jsonNode["Components"][i]["Content"]);
             jsonNode["Components"].Remove(i);
         }
         LoadComponent<Favorites>();
@@ -62,8 +69,15 @@ class ComponentsLayoutPatch
                 Debug.LogError($"Failed init {typeof(T)}, no node in json.");
                 return;
             }
-            val.LoadJSON(value);
+
+            val.LoadJSON(AlterLoadNode(value));
         }
+    }
+
+    private static JSONNode AlterLoadNode(JSONNode node)
+    {
+        node["Type"] = node["ModType"];
+        return node;
     }
 
 }
