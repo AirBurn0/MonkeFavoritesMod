@@ -19,7 +19,7 @@ public static class FavoritesHelper
     private static Sprite? _icon;
 
     private static List<string> _favorites;
-    private static List<GameObject> _items;
+    private static List<GameObject> _items = new();
 
     public static void AddSubIconToSlot(GameObject slut, string? item)
     {
@@ -83,8 +83,13 @@ public static class FavoritesHelper
 
     private static void Refresh(string itemName)
     {
-        foreach (GameObject slut in _items)
+        for (int i = _items.Count - 1; i >= 0 ; --i)
         {
+            GameObject slut = _items[i];
+            if (slut is null || !slut) {
+                _items.RemoveAt(i);
+                continue;
+            }
             if (slut.GetComponent<ItemSlot>() is ItemSlot slot && slot.Item?.Id == itemName)
             {
                 SetSubIconActive(slut, itemName);
