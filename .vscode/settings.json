@@ -1,0 +1,13 @@
+{
+    "cSpell.words": [
+        "Quasimorph"
+    ],
+    "dotnetAcquisitionExtension.existingDotnetPath": [
+        {
+          "extensionId": "ms-dotnettools.csdevkit",
+          "path": "C:\\Program Files\\dotnet\\dotnet.exe"
+        }
+    ],
+    "liveshare.shareExternalFiles": false,
+    "dotnet.defaultSolution": "MonkeFavoritesMod.sln"
+}

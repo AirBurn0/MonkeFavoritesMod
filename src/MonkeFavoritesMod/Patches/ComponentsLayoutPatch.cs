@@ -1,0 +1,69 @@
+using HarmonyLib;
+using MonkeFavoritesMod.Helpers;
+using MonkeFavoritesMod.Data;
+using SimpleJSON;
+using System.Collections.Generic;
+using System;
+
+namespace MonkeFavoritesMod.Patches;
+
+[HarmonyPatch(typeof(ComponentsLayout))]
+class ComponentsLayoutPatch
+{
+
+    [HarmonyPatch(nameof(ComponentsLayout.CreateGlobalComponents), new[] { typeof(bool) }), HarmonyPostfix]
+    static void CreateGlobalComponentsPostfix(State ____state, bool initContent)
+    {
+        ____state.Resolve(new Favorites());
+    }
+
+    [HarmonyPatch(nameof(ComponentsLayout.RemoveGlobalComponents)), HarmonyPostfix]
+    static void RemoveGlobalComponentsPostfix(State ____state)
+    {
+        ____state.Remove<Favorites>();
+    }
+
+    [HarmonyPatch(nameof(ComponentsLayout.SerializeGlobalComponents), new[] { typeof(JSONNode) }), HarmonyPrefix]
+    static void SerializeGlobalComponentsPrefix(State ____state, JSONNode rootNode)
+    {
+        JSONNode asArray = rootNode["Components"].AsArray;
+        asArray.Add(SaveToJSON.CreateNode(____state.Get<Favorites>()));
+    }
+
+    [HarmonyPatch(nameof(ComponentsLayout.DeserializeGlobalComponents), new[] { typeof(JSONNode) }), HarmonyPostfix]
+    static void DeserializeGlobalComponentsPostfix(State ____state, JSONNode jsonNode)
+    {
+        FavoritesHelper.SetFavorites(____state.Get<Favorites>()?.Values ?? new());
+    }
+
+    [HarmonyPatch(nameof(ComponentsLayout.DeserializeGlobalComponents), new[] { typeof(JSONNode) }), HarmonyPrefix]
+    static void DeserializeGlobalComponentsPrefix(State ____state, ref JSONNode jsonNode)
+    {
+        Dictionary<Type, JSONNode> typesToNodes = new Dictionary<Type, JSONNode>();
+        for (int i = jsonNode["Components"].Count - 1; i >= 0; --i)
+        {
+            string type = jsonNode["Components"][i]["Type"];
+            if (!type.Contains("MonkeFavoritesMod."))
+                continue;
+            typesToNodes.Add(typeof(MonkeFavoritesMod).Assembly.GetType(jsonNode["Components"][i]["Type"]), jsonNode["Components"][i]["Content"]);
+            jsonNode["Components"].Remove(i);
+        }
+        LoadComponent<Favorites>();
+        void LoadComponent<T>() where T : class
+        {
+            T val = ____state.Get<T>();
+            if (val == null)
+            {
+                Debug.LogError($"Failed load {typeof(T)} from json, no in state.");
+                return;
+            }
+            if (!typesToNodes.TryGetValue(typeof(T), out var value))
+            {
+                Debug.LogError($"Failed init {typeof(T)}, no node in json.");
+                return;
+            }
+            val.LoadJSON(value);
+        }
+    }
+
+}

@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "Quasimorph Launch",
+            "program": "cmd.exe",
+            "preLaunchTask": "build",
+            "request": "launch",
+            "args": [
+                "/k start steam://rungameid/2059170 && exit"
+            ],
+            "type": "clr"
+        }
+    ]
+}
