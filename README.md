@@ -15,3 +15,5 @@ Public repository for MonkeFavoritesMod
 
 # Installing
 Open [Steam Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=3404205113), click [*Subscribe*] button.
+
+There is no support for non-Steam versions (EGS/GOG/others), that means you can't use it with BepInEx or MelonLoader.
