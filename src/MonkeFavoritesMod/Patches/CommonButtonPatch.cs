@@ -13,7 +13,9 @@ class CommonButtonPatch
     {
         if (!__instance.interactable)
             return true;
-        MagnumPerkTooltipHandler handler = __instance.gameObject.GetComponent<MagnumPerkTooltipHandler>();
+        if(__instance.gameObject.TryGetComponent(out MagnumPerkTooltipHandler handler)) {
+            return true;
+        }
         if (Traverse.Create(handler).Field("_perkRecord").GetValue() is not MagnumPerkRecord perkRecord)
             return true;
         if (Traverse.Create(handler).Field("_isPerkPurchased").GetValue() is not bool isPerkPurchased || isPerkPurchased)
