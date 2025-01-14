@@ -1,16 +1,12 @@
 {
     "version": "0.2.0",
     "configurations": [
-        
         {
-            "name": "Quasimorph Launch",
-            "program": "cmd.exe",
-            "preLaunchTask": "build",
+            "name": "Launch",
             "request": "launch",
-            "args": [
-                "/k start steam://rungameid/2059170 && exit"
-            ],
-            "type": "clr"
+            "type": "node-terminal",
+            "preLaunchTask": "dotnet build",
+            "command": "start steam://rungameid/2059170 \"a\" && exit",
         }
     ]
 }
