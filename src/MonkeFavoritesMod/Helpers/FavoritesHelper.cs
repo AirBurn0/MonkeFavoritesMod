@@ -90,18 +90,15 @@ public static class FavoritesHelper
                 _items.RemoveAt(i);
                 continue;
             }
-            if (slut.GetComponent<ItemSlot>() is ItemSlot slot && slot.Item?.Id == itemName)
+            if (slut.TryGetComponent(out ItemSlot slot) && slot.Item?.Id == itemName)
             {
                 SetSubIconActive(slut, itemName);
                 continue;
             }
-            if (slut.GetComponent<ItemTooltipHandler>() is ItemTooltipHandler handler)
+            if (slut.TryGetComponent(out ItemTooltipHandler handler) && new Traverse(handler).Field("_item").GetValue() is BasePickupItem item && item.Id == itemName)
             {
-                if (new Traverse(handler).Field("_item").GetValue() is BasePickupItem item && item.Id == itemName)
-                {
-                    SetSubIconActive(slut, itemName);
+                SetSubIconActive(slut, itemName);
                     continue;
-                }
             }
         }
     }
