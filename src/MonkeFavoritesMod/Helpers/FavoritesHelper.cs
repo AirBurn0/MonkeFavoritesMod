@@ -98,7 +98,7 @@ public static class FavoritesHelper
             if (slut.TryGetComponent(out ItemTooltipHandler handler) && new Traverse(handler).Field("_item").GetValue() is BasePickupItem item && item.Id == itemName)
             {
                 SetSubIconActive(slut, itemName);
-                    continue;
+                continue;
             }
         }
     }

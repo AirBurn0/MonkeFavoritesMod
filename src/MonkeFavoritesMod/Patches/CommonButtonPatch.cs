@@ -11,22 +11,17 @@ class CommonButtonPatch
     [HarmonyPatch(nameof(CommonButton.OnPointerClick), new[] { typeof(PointerEventData) }), HarmonyPrefix]
     static bool OnPointerClickPrefix(CommonButton __instance, ref PointerEventData eventData)
     {
-        if (!__instance.interactable) {
+        if (!__instance.interactable)
             return true;
-        }
-        if(!__instance.gameObject.TryGetComponent(out MagnumPerkTooltipHandler handler)) {
+        if(!__instance.gameObject.TryGetComponent(out MagnumPerkTooltipHandler handler))
             return true;
-        }
-        if (Traverse.Create(handler).Field("_perkRecord").GetValue() is not MagnumPerkRecord perkRecord) {
+        if (Traverse.Create(handler).Field("_perkRecord").GetValue() is not MagnumPerkRecord perkRecord)
             return true;
-        }
-        if (Traverse.Create(handler).Field("_isPerkPurchased").GetValue() is not bool isPerkPurchased || isPerkPurchased) {
+        if (Traverse.Create(handler).Field("_isPerkPurchased").GetValue() is not bool isPerkPurchased || isPerkPurchased)
             return true;
-        }
         HashSet<string> uniqueItems = new(perkRecord.UpgradePrice);
-        if (uniqueItems.Count < 1) {
+        if (uniqueItems.Count < 1)
             return true;
-        }
         bool add;
         switch (eventData.button)
         {

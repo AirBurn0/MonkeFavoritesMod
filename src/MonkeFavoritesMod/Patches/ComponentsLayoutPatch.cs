@@ -14,7 +14,10 @@ class ComponentsLayoutPatch
     [HarmonyPatch(nameof(ComponentsLayout.CreateGlobalComponents), new[] { typeof(bool) }), HarmonyPostfix]
     static void CreateGlobalComponentsPostfix(State ____state, bool initContent)
     {
-        ____state.Resolve(new Favorites());
+        Favorites favs = new Favorites();
+        ____state.Resolve(favs);
+        if(initContent)
+            FavoritesHelper.SetFavorites(favs.Values ?? new());
     }
 
     [HarmonyPatch(nameof(ComponentsLayout.RemoveGlobalComponents)), HarmonyPostfix]
