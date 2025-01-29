@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using HarmonyLib;
 using MonkeFavoritesMod.Helpers;
 
@@ -7,34 +6,31 @@ namespace MonkeFavoritesMod.Patches;
 [HarmonyPatch(typeof(MGSC.ContextMenu))]
 class ContextMenuPatch
 {
-    private static readonly ContextMenuCommand
-    AddFavorite = (ContextMenuCommand)101,
-    RemoveFavorite = (ContextMenuCommand)102;
+    public const int
+    AddFavorite = 101,
+    RemoveFavorite = 102;
 
     [HarmonyPatch("InitCommands"), HarmonyPostfix]
     static void InitCommandsPostfix(MGSC.ContextMenu __instance, BasePickupItem ____item)
     {
         if (!FavoritesHelper.ShouldBeMarked(____item?.Id))
-            Traverse.Create(__instance).Method("SetupCommand", AddFavorite).GetValue();
+            Traverse.Create(__instance).Method("SetupCommand", (ContextMenuCommand)AddFavorite).GetValue();
         else
-            Traverse.Create(__instance).Method("SetupCommand", RemoveFavorite).GetValue();
+            Traverse.Create(__instance).Method("SetupCommand", (ContextMenuCommand)RemoveFavorite).GetValue();
     }
 
-    [HarmonyPatch("OnContextCommandClick"), HarmonyPrefix]
-    static void OnContextCommandClickPrefix(Dictionary<CommonButton, ContextMenuCommand> ____commandBinds, BasePickupItem ____item, CommonButton button, int clickCount)
+    [HarmonyPatch("ProcessBind"), HarmonyPrefix]
+    static void ProcessBindPrefix(BasePickupItem ____item, int bindValue, bool hideContextMenu)
     {
         if (____item?.Id is null)
         {
             return;
         }
-        ContextMenuCommand bind = ____commandBinds[button];
-        if (bind == AddFavorite)
+        switch (bindValue)
         {
-            FavoritesHelper.AddFavorite(____item.Id);
-        }
-        if (bind == RemoveFavorite)
-        {
-            FavoritesHelper.RemoveFavorite(____item.Id);
+            default: return;
+            case AddFavorite: FavoritesHelper.AddFavorite(____item.Id); break;
+            case RemoveFavorite: FavoritesHelper.RemoveFavorite(____item.Id); break;
         }
         ____item.Storage.RecalculateWeight();
     }

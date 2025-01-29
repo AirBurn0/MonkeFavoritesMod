@@ -10,6 +10,7 @@ public static class MonkeFavoritesMod
     [Hook(ModHookType.AfterConfigsLoaded)]
     public static void AfterConfigLoaded(IModContext context)
     {
+        Debug.Log("Mod Launched");
         new Harmony(ModName).PatchAll(Assembly.GetExecutingAssembly());
     }
     
