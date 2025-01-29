@@ -8,10 +8,10 @@ Public repository for MonkeFavoritesMod
 
 ## Controls
 
-* **RMB > Favorite** - adds item to your favorites.
-* **RMB > Unfavorite** - removes item from your favorites.
-* **RMB** on ship upgrades, adds all necessary items to favorites.
-* **MMB** on ship upgrades, removes all necessary items from favorites.
+* **RMB** on item > **Favorite** - adds item to your favorites.
+* **RMB** on item > **Unfavorite** - removes item from your favorites.
+* **RMB** on ship upgrade - adds all necessary items to favorites.
+* **MMB** on ship upgrade - removes all necessary items from favorites.
 
 # Installing
 Open [Steam Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=3404205113), click [*Subscribe*] button.
