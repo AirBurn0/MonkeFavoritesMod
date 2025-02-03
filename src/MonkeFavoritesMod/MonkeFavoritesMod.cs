@@ -7,8 +7,8 @@ public static class MonkeFavoritesMod
 {
     public static string ModName = "MonkeFavoritesMod";
     
-    [Hook(ModHookType.AfterConfigsLoaded)]
-    public static void AfterConfigLoaded(IModContext context)
+    [Hook(ModHookType.AfterBootstrap)]
+    public static void AfterBootstrap(IModContext context)
     {
         Debug.Log("Mod Launched");
         new Harmony(ModName).PatchAll(Assembly.GetExecutingAssembly());
