@@ -15,9 +15,8 @@ class CommonButtonPatch
             return true;
         if(!__instance.gameObject.TryGetComponent(out MagnumPerkTooltipHandler handler))
             return true;
-        if (Traverse.Create(handler).Field("_perkRecord").GetValue() is not MagnumPerkRecord perkRecord)
-            return true;
-        if (Traverse.Create(handler).Field("_isPerkPurchased").GetValue() is not bool isPerkPurchased || isPerkPurchased)
+        MagnumPerkRecord perkRecord = handler._perkRecord;
+        if (perkRecord is null || handler._isPerkPurchased)
             return true;
         HashSet<string> uniqueItems = new(perkRecord.UpgradePrice);
         if (uniqueItems.Count < 1)

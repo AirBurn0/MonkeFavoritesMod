@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using HarmonyLib;
 using UnityEngine.UI;
 
 namespace MonkeFavoritesMod.Helpers;
@@ -90,12 +89,9 @@ public static class FavoritesHelper
                 _items.RemoveAt(i);
                 continue;
             }
-            if (slut.TryGetComponent(out ItemSlot slot) && slot.Item?.Id == itemName)
-            {
-                SetSubIconActive(slut, itemName);
-                continue;
-            }
-            if (slut.TryGetComponent(out ItemTooltipHandler handler) && new Traverse(handler).Field("_item").GetValue() is BasePickupItem item && item.Id == itemName)
+            if (slut.TryGetComponent(out ItemSlot slot) && slot.Item?.Id == itemName
+                || slut.TryGetComponent(out ItemTooltipHandler handler) && handler._item?.Id == itemName
+            )
             {
                 SetSubIconActive(slut, itemName);
                 continue;

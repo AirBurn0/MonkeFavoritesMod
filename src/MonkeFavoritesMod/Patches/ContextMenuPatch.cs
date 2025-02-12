@@ -14,9 +14,9 @@ class ContextMenuPatch
     static void InitCommandsPostfix(MGSC.ContextMenu __instance, BasePickupItem ____item)
     {
         if (!FavoritesHelper.ShouldBeMarked(____item?.Id))
-            Traverse.Create(__instance).Method("SetupCommand", (ContextMenuCommand)AddFavorite).GetValue();
+            __instance.SetupCommand((ContextMenuCommand)ContextMenuPatch.AddFavorite);
         else
-            Traverse.Create(__instance).Method("SetupCommand", (ContextMenuCommand)RemoveFavorite).GetValue();
+            __instance.SetupCommand((ContextMenuCommand)ContextMenuPatch.RemoveFavorite);
     }
 
     [HarmonyPatch("ProcessBind"), HarmonyPrefix]
