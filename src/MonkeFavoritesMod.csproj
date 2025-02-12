@@ -3,37 +3,33 @@
         <TargetFramework>net48</TargetFramework>
         <LangVersion>latestmajor</LangVersion>
         <Nullable>enable</Nullable>
-        <SteamDir>D:\Steam</SteamDir>
+        <ModID>3404205113</ModID>
+        <SteamDir>D:\Steam\</SteamDir>
+        <RefsDir>$(SteamDir)steamapps\common\Quasimorph\Quasimorph_Data\Managed\</RefsDir>
+        <ModDir>$(SteamDir)steamapps\workshop\content\2059170\$(ModID)</ModDir>
     </PropertyGroup>
     <Target Name="CopyOutput" AfterTargets="Build">
         <ItemGroup>
-            <DllFiles Include="$(TargetDir)*.dll" />
-            <ManifestFile Include="$(TargetDir)modmanifest.json" />
-            <ThumbnailFile Include="$(TargetDir)thumbnail.png" />
-            <LangFiles Include="$(TargetDir)lang\*.json" />
+            <ModFiles Include="$(TargetDir)**\*.*" Exclude="$(TargetDir)BepInEx.AssemblyPublicizer*.dll;$(TargetDir)AsmResolver*.dll;$(TargetDir)*.pdb" />
         </ItemGroup>
-        <Copy SourceFiles="@(DllFiles);@(ManifestFile);@(ThumbnailFile);"
-              DestinationFolder="$(SteamDir)\steamapps\workshop\content\2059170\3404205113"
-              SkipUnchangedFiles="false"/>
-        <Copy SourceFiles="@(LangFiles)"
-              DestinationFolder="$(SteamDir)\steamapps\workshop\content\2059170\3404205113\lang"
-              SkipUnchangedFiles="false"/>
+        <Copy SourceFiles="@(ModFiles)" DestinationFolder="$(DeployDir)\%(RecursiveDir)" SkipUnchangedFiles="false"/>
     </Target>
     <ItemGroup>
-      <None Update="modmanifest.json" CopyToOutputDirectory = "Always"/>
-      <None Update="thumbnail.png" CopyToOutputDirectory = "Always"/>
-      <Content Include="Resources\**" Link="%(RecursiveDir)\%(FileName)%(Extension)" CopyToOutputDirectory="Always" />
+        <None Update="modmanifest.json" CopyToOutputDirectory="Always"/>
+        <None Update="thumbnail.png" CopyToOutputDirectory="Always"/>
+        <Content Include="Resources\**" Link="%(RecursiveDir)\%(FileName)%(Extension)" CopyToOutputDirectory="Always" />
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Lib.Harmony" Version="2.3.3"/>
+        <PackageReference Include="Lib.Harmony" Version="2.3.3" />
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" PrivateAssets="all" />
     </ItemGroup>
     <ItemGroup>
-        <Reference Include="Assembly-CSharp" HintPath="$(SteamDir)\steamapps\common\Quasimorph\Quasimorph_Data\Managed\Assembly-CSharp.dll" Private="false" publicize="true"/>
-        <Reference Include="UnityEngine" HintPath="$(SteamDir)\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.dll" Private="false"/>
-        <Reference Include="UnityEngine.AudioModule" HintPath="$(SteamDir)\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.AudioModule.dll" Private="false"/>
-        <Reference Include="UnityEngine.CoreModule" HintPath="$(SteamDir)\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.CoreModule.dll" Private="false"/>
-        <Reference Include="UnityEngine.UI" HintPath="$(SteamDir)\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.UI.dll" Private="false"/>
-        <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(SteamDir)\steamapps\common\Quasimorph\Quasimorph_Data\Managed\UnityEngine.InputLegacyModule.dll" Private="false"/>
-        <Reference Include="SimpleJSON" HintPath="$(SteamDir)\steamapps\common\Quasimorph\Quasimorph_Data\Managed\SimpleJSON.dll" Private="false"/>
+        <Reference Include="Assembly-CSharp" HintPath="$(RefsDir)Assembly-CSharp.dll" Private="false" Publicize="true"/>
+        <Reference Include="UnityEngine" HintPath="$(RefsDir)UnityEngine.dll" Private="false"/>
+        <Reference Include="UnityEngine.AudioModule" HintPath="$(RefsDir)UnityEngine.AudioModule.dll" Private="false"/>
+        <Reference Include="UnityEngine.CoreModule" HintPath="$(RefsDir)UnityEngine.CoreModule.dll" Private="false"/>
+        <Reference Include="UnityEngine.UI" HintPath="$(RefsDir)UnityEngine.UI.dll" Private="false"/>
+        <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(RefsDir)UnityEngine.InputLegacyModule.dll" Private="false"/>
+        <Reference Include="SimpleJSON" HintPath="$(RefsDir)SimpleJSON.dll" Private="false"/>
     </ItemGroup>
 </Project>
