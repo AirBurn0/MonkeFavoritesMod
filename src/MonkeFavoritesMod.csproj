@@ -6,13 +6,13 @@
         <ModID>3404205113</ModID>
         <SteamDir>D:\Steam\</SteamDir>
         <RefsDir>$(SteamDir)steamapps\common\Quasimorph\Quasimorph_Data\Managed\</RefsDir>
-        <ModDir>$(SteamDir)steamapps\workshop\content\2059170\$(ModID)</ModDir>
+        <ModDir>$(SteamDir)steamapps\workshop\content\2059170\$(ModID)\</ModDir>
     </PropertyGroup>
     <Target Name="CopyOutput" AfterTargets="Build">
         <ItemGroup>
             <ModFiles Include="$(TargetDir)**\*.*" Exclude="$(TargetDir)BepInEx.AssemblyPublicizer*.dll;$(TargetDir)AsmResolver*.dll;$(TargetDir)*.pdb" />
         </ItemGroup>
-        <Copy SourceFiles="@(ModFiles)" DestinationFolder="$(DeployDir)\%(RecursiveDir)" SkipUnchangedFiles="false"/>
+        <Copy SourceFiles="@(ModFiles)" DestinationFolder="$(ModDir)%(RecursiveDir)" SkipUnchangedFiles="false"/>
     </Target>
     <ItemGroup>
         <None Update="modmanifest.json" CopyToOutputDirectory="Always"/>
