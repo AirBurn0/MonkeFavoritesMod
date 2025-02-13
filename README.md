@@ -14,6 +14,7 @@ Public repository for MonkeFavoritesMod
 * **MMB** on ship upgrade - removes all necessary items from favorites.
 
 # Installing
+## Steam
 Open [Steam Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=3404205113), click [*Subscribe*] button.
-
-There is no support for non-Steam versions (EGS/GOG/others), that means you can't use it with BepInEx or MelonLoader.
+## Non-Steam
+Download [latest release](https://github.com/AirBurn0/MonkeFavoritesMod/releases/latest) and put it into [mods](https://discord.com/channels/912012292445593630/1258829394341003335) folder.
