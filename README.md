@@ -12,6 +12,8 @@ Public repository for MonkeFavoritesMod
 * **RMB** on item > **Unfavorite** - removes item from your favorites.
 * **RMB** on ship upgrade - adds all necessary items to favorites.
 * **MMB** on ship upgrade - removes all necessary items from favorites.
+* **RMB** on craft component in production menu - adds item to favorites.
+* **MMB** on craft component in production menu - removes item from favorites.
 
 # Installing
 ## Steam
