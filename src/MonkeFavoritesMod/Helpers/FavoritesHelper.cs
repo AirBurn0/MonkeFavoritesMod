@@ -82,15 +82,16 @@ public static class FavoritesHelper
 
     private static void Refresh(string itemName)
     {
-        for (int i = _items.Count - 1; i >= 0 ; --i)
+        for (int i = _items.Count - 1; i >= 0; --i)
         {
             GameObject slut = _items[i];
-            if (slut is null || !slut) {
+            if (slut is null || !slut)
+            {
                 _items.RemoveAt(i);
                 continue;
             }
             if (slut.TryGetComponent(out ItemSlot slot) && slot.Item?.Id == itemName
-                || slut.TryGetComponent(out ItemTooltipHandler handler) && handler._item?.Id == itemName
+                || slut.TryGetComponent(out ItemTooltipHandler handler) && (handler._item?.Id == itemName || handler._itemRecord?.Id == itemName)
             )
             {
                 SetSubIconActive(slut, itemName);
