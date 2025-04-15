@@ -1,4 +1,4 @@
 {
-	"ui.context.101": "Favorite",
-	"ui.context.102": "Unfavorite"
+	"ui.context.AddFavorite": "Favorite",
+	"ui.context.RemoveFavorite": "Unfavorite"
 }

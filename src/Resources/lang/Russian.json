@@ -1,4 +1,4 @@
 {
-	"ui.context.101": "Добавить в Избранное",
-	"ui.context.102": "Убрать из Избранного"
+	"ui.context.AddFavorite": "Добавить в Избранное",
+	"ui.context.RemoveFavorite": "Убрать из Избранного"
 }

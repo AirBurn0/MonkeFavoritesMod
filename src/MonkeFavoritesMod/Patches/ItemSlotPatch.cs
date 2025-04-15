@@ -2,12 +2,12 @@ using HarmonyLib;
 using MonkeFavoritesMod.Helpers;
 
 namespace MonkeFavoritesMod.Patches;
-
+// AmmoSlot
 [HarmonyPatch(typeof(ItemSlot))]
 class ItemSlotPatch
 {
-    [HarmonyPatch(nameof(ItemSlot.Initialize), new[] { typeof(BasePickupItem), typeof(ItemStorage) }), HarmonyPrefix]
-    static void InitializePrefix(ItemSlot __instance, BasePickupItem item, ItemStorage itemStorage)
+    [HarmonyPatch(nameof(ItemSlot.Initialize), new[] { typeof(BasePickupItem), typeof(ItemStorage), typeof(ItemSlot.DisplayMode) }), HarmonyPrefix]
+    static void InitializePrefix(ItemSlot __instance, BasePickupItem item, ItemStorage itemStorage, ItemSlot.DisplayMode displayMode)
     {
         FavoritesHelper.AddSubIconToSlot(__instance.gameObject, item?.Id);
     }

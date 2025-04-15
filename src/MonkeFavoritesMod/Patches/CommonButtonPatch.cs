@@ -11,7 +11,7 @@ class CommonButtonPatch
     [HarmonyPatch(nameof(CommonButton.OnPointerClick), new[] { typeof(PointerEventData) }), HarmonyPrefix]
     static bool OnPointerClickPrefix(CommonButton __instance, ref PointerEventData eventData)
     {
-        if (!__instance.interactable)
+        if (!__instance.IsInteractable)
             return true;
         if(!__instance.gameObject.TryGetComponent(out MagnumPerkTooltipHandler handler))
             return true;

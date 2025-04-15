@@ -10,8 +10,8 @@ public static class MonkeFavoritesMod
     [Hook(ModHookType.BeforeBootstrap)]
     public static void BeforeBootstrap(IModContext context)
     {
-        Debug.Log("Mod Launched");
         new Harmony(ModName).PatchAll(Assembly.GetExecutingAssembly());
+        Debug.Log($"{ModName} Loaded");
     }
     
 }
