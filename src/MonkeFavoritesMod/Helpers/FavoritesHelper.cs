@@ -17,8 +17,8 @@ public static class FavoritesHelper
 
     private static Sprite? _icon;
 
-    private static List<string> _favorites = [];
-    private static List<GameObject> _items = [];
+    private static readonly List<string> _favorites = [];
+    private static readonly List<GameObject> _items = [];
 
     public static void AddSubIconToSlot(GameObject slut, string? item)
     {
@@ -31,24 +31,19 @@ public static class FavoritesHelper
         GameObject subIcon = new("SubIcon");
         Image image = subIcon.AddComponent<Image>();
         image.sprite = Icon;
-        image.color = new Color(1f, 1f, 0f, 1f);
+        image.color = new(1f, 1f, 0f, 1f);
         RectTransform transform = subIcon.GetComponent<RectTransform>();
         transform.SetParent(parent);
-        transform.anchoredPosition = new Vector2(-5f, -5f);
+        transform.anchoredPosition = new(-5f, -5f);
         transform.anchorMin = transform.anchorMax = Vector2.one;
-        transform.sizeDelta = new Vector2(16f, 16f);
+        transform.sizeDelta = new(16f, 16f);
         subIcon.SetActive(ShouldBeMarked(item));
         _items.Add(slut);
     }
 
     public static void SetSubIconActive(GameObject slut, string? item)
     {
-        var subIcon = slut.GetComponent<RectTransform>().Find("SubIcon").gameObject;
-        if (subIcon == null)
-        {
-            return;
-        }
-        subIcon.SetActive(ShouldBeMarked(item));
+        slut.GetComponent<RectTransform>().Find("SubIcon").gameObject?.SetActive(ShouldBeMarked(item));
     }
 
     public static bool ShouldBeMarked(string? item)
@@ -76,8 +71,8 @@ public static class FavoritesHelper
 
     public static void SetFavorites(List<string> favorites)
     {
-        _favorites = favorites;
-        _items = [];
+        _favorites.Clear();
+        _favorites.AddRange(favorites);
     }
 
     private static void Refresh(string itemName)
