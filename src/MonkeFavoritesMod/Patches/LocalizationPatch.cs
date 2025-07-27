@@ -35,10 +35,9 @@ class LocalizationPatch
     static JSONNode? LoadTextFile(string lang)
     {
         string path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(MonkeFavoritesMod)).Location), "lang", $"{lang}.json");
-        Debug.Log("LoadTextFile " + path);
         if (!File.Exists(path))
         {
-            Debug.LogWarning("No file " + path);
+            Debug.LogWarning($"Can't find '{lang}' localization file by path:\n{path}");
             return null;
         }
         try
@@ -48,7 +47,7 @@ class LocalizationPatch
         }
         catch (Exception ex)
         {
-            Debug.LogError("Failed read file " + ex.Message);
+            Debug.LogError($"Failed to read '{lang}' localization file by path:\n{path}\n{ex.Message}");
         }
         return null;
     }
