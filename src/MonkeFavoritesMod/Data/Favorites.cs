@@ -7,7 +7,7 @@ namespace MonkeFavoritesMod.Data
 	public class Favorites : IWrapTypeOnSave, IManualSave
 	{
 		[Save]
-		public List<string> Values = new List<string>();
+		public List<string> Values = [];
 
 		public JSONNode OnManualSave()
 		{

@@ -11,13 +11,13 @@ namespace MonkeFavoritesMod.Patches;
 class ComponentsLayoutPatch
 {
 
-    [HarmonyPatch(nameof(ComponentsLayout.CreateGlobalComponents), new[] { typeof(bool) }), HarmonyPostfix]
+    [HarmonyPatch(nameof(ComponentsLayout.CreateGlobalComponents), [typeof(bool)]), HarmonyPostfix]
     static void CreateGlobalComponentsPostfix(State ____state, bool initContent)
     {
-        Favorites favs = new Favorites();
+        Favorites favs = new();
         ____state.Resolve(favs);
         if(initContent)
-            FavoritesHelper.SetFavorites(favs.Values ?? new());
+            FavoritesHelper.SetFavorites(favs.Values ?? []);
     }
 
     [HarmonyPatch(nameof(ComponentsLayout.RemoveGlobalComponents)), HarmonyPostfix]
@@ -26,7 +26,7 @@ class ComponentsLayoutPatch
         ____state.Remove<Favorites>();
     }
 
-    [HarmonyPatch(nameof(ComponentsLayout.SerializeGlobalComponents), new[] { typeof(JSONNode) }), HarmonyPrefix]
+    [HarmonyPatch(nameof(ComponentsLayout.SerializeGlobalComponents), [typeof(JSONNode)]), HarmonyPrefix]
     static void SerializeGlobalComponentsPrefix(State ____state, JSONNode rootNode)
     {
         JSONNode asArray = rootNode["Components"].AsArray;
@@ -40,16 +40,16 @@ class ComponentsLayoutPatch
         return node;
     }
 
-    [HarmonyPatch(nameof(ComponentsLayout.DeserializeGlobalComponents), new[] { typeof(JSONNode) }), HarmonyPostfix]
+    [HarmonyPatch(nameof(ComponentsLayout.DeserializeGlobalComponents), [typeof(JSONNode)]), HarmonyPostfix]
     static void DeserializeGlobalComponentsPostfix(State ____state, JSONNode jsonNode)
     {
-        FavoritesHelper.SetFavorites(____state.Get<Favorites>()?.Values ?? new());
+        FavoritesHelper.SetFavorites(____state.Get<Favorites>()?.Values ?? []);
     }
 
-    [HarmonyPatch(nameof(ComponentsLayout.DeserializeGlobalComponents), new[] { typeof(JSONNode) }), HarmonyPrefix]
+    [HarmonyPatch(nameof(ComponentsLayout.DeserializeGlobalComponents), [typeof(JSONNode)]), HarmonyPrefix]
     static void DeserializeGlobalComponentsPrefix(State ____state, ref JSONNode jsonNode)
     {
-        Dictionary<Type, JSONNode> typesToNodes = new Dictionary<Type, JSONNode>();
+        Dictionary<Type, JSONNode> typesToNodes = [];
         for (int i = jsonNode["Components"].Count - 1; i >= 0; --i)
         {
             string type = jsonNode["Components"][i]["ModType"];

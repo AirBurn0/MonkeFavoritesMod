@@ -8,7 +8,7 @@ namespace MonkeFavoritesMod.Patches;
 [HarmonyPatch(typeof(CommonButton))]
 class CommonButtonPatch
 {
-    [HarmonyPatch(nameof(CommonButton.OnPointerClick), new[] { typeof(PointerEventData) }), HarmonyPrefix]
+    [HarmonyPatch(nameof(CommonButton.OnPointerClick), [typeof(PointerEventData)]), HarmonyPrefix]
     static bool OnPointerClickPrefix(CommonButton __instance, ref PointerEventData eventData)
     {
         if (!__instance.IsInteractable)
@@ -18,7 +18,7 @@ class CommonButtonPatch
         MagnumPerkRecord perkRecord = handler._perkRecord;
         if (perkRecord is null || handler._isPerkPurchased)
             return true;
-        HashSet<string> uniqueItems = new(perkRecord.UpgradePrice);
+        HashSet<string> uniqueItems = [.. perkRecord.UpgradePrice];
         if (uniqueItems.Count < 1)
             return true;
         bool add;

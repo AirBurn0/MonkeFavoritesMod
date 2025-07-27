@@ -6,7 +6,7 @@ namespace MonkeFavoritesMod.Patches;
 [HarmonyPatch(typeof(ItemReceiptRequiredSlot))]
 class ItemReceiptRequiredSlotPatch
 {
-    [HarmonyPatch(nameof(ItemReceiptRequiredSlot.Initialize), new[] { typeof(string), typeof(bool) }), HarmonyPrefix]
+    [HarmonyPatch(nameof(ItemReceiptRequiredSlot.Initialize), [typeof(string), typeof(bool)]), HarmonyPrefix]
     static void InitializePrefix(ItemReceiptRequiredSlot __instance, string itemId, bool available)
     {
         if (!__instance.gameObject.TryGetComponent(out ItemSlotClickHandler listener))
