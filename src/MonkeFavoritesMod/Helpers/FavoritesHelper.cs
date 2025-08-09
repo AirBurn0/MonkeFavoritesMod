@@ -16,8 +16,12 @@ public static class FavoritesHelper
     }
 
     private static Sprite? _icon;
-
-    private static readonly List<string> _favorites = [];
+    public static List<string> Favorites
+    {
+        get => _favorites;
+        set => _favorites = value;
+    }
+    private static List<string> _favorites = [];
     private static readonly List<GameObject> _items = [];
 
     public static void AddSubIconToSlot(GameObject slut, string? item)
@@ -67,12 +71,6 @@ public static class FavoritesHelper
             _favorites?.Remove(item);
             Refresh(item);
         }
-    }
-
-    public static void SetFavorites(List<string> favorites)
-    {
-        _favorites.Clear();
-        _favorites.AddRange(favorites);
     }
 
     private static void Refresh(string itemName)

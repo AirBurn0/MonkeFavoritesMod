@@ -17,7 +17,7 @@ class ComponentsLayoutPatch
         Favorites favs = new();
         ____state.Resolve(favs);
         if(initContent)
-            FavoritesHelper.SetFavorites(favs.Values ?? []);
+            FavoritesHelper.Favorites = favs.Values;
     }
 
     [HarmonyPatch(nameof(ComponentsLayout.RemoveGlobalComponents)), HarmonyPostfix]
@@ -43,7 +43,13 @@ class ComponentsLayoutPatch
     [HarmonyPatch(nameof(ComponentsLayout.DeserializeGlobalComponents), [typeof(JSONNode)]), HarmonyPostfix]
     static void DeserializeGlobalComponentsPostfix(State ____state, JSONNode jsonNode)
     {
-        FavoritesHelper.SetFavorites(____state.Get<Favorites>()?.Values ?? []);
+        Favorites? favs = ____state.Get<Favorites>();
+        if (favs == null)
+        {
+            favs = new();
+            ____state.Resolve(favs);
+        }
+        FavoritesHelper.Favorites = favs.Values;
     }
 
     [HarmonyPatch(nameof(ComponentsLayout.DeserializeGlobalComponents), [typeof(JSONNode)]), HarmonyPrefix]
