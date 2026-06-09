@@ -1,5 +1,6 @@
 using HarmonyLib;
 using MonkeFavoritesMod.Helpers;
+using MonkeFavoritesMod.Scripts;
 
 namespace MonkeFavoritesMod.Patches;
 
@@ -17,6 +18,9 @@ class ItemTooltipHandlerPatch
     static void InitializePrefix(ItemTooltipHandler __instance, string itemId)
     {
         FavoritesHelper.AddSubIconToSlot(__instance.gameObject, itemId);
+        if (!__instance.gameObject.TryGetComponent(out ItemSlotClickHandler listener))
+            listener = __instance.gameObject.AddComponent<ItemSlotClickHandler>();
+        listener.Initialize(__instance);
     }
 
 }
