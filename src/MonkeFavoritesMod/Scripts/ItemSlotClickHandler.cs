@@ -16,7 +16,6 @@ public class ItemSlotClickHandler : MonoBehaviour, IPointerClickHandler, IEventS
     {
         if (_itemTooltipHandler?._itemRecord?.Id is not string item)
             return;
-        Debug.Log(item);
         SingletonMonoBehaviour<SoundController>.Instance.PlayUiSound(SingletonMonoBehaviour<SoundsStorage>.Instance.ButtonClick);
         switch (eventData.button)
         {

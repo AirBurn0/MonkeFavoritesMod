@@ -7,15 +7,17 @@ namespace MonkeFavoritesMod.Helpers;
 public static class FavoritesHelper
 {
 
+    private static readonly string ICON_SPRITE_STRING = "common_white_icons_45";
+
     public static Sprite? Icon
     {
         get // icon_stun story_versus
         {
-            return _icon ??= Resources.FindObjectsOfTypeAll<Sprite>().Where(s => s.name.Contains("icon_stun")).First();
+            return _icon ??= Resources.FindObjectsOfTypeAll<Sprite>().FirstOrDefault(s => s.name.Contains(ICON_SPRITE_STRING));
         }
     }
 
-    private static Sprite? _icon;
+    private static Sprite? _icon = null;
     public static List<string> Favorites
     {
         get => _favorites;
@@ -33,15 +35,18 @@ public static class FavoritesHelper
             return;
         }
         GameObject subIcon = new("SubIcon");
-        Image image = subIcon.AddComponent<Image>();
-        image.sprite = Icon;
-        image.color = new(1f, 1f, 0f, 1f);
-        RectTransform transform = subIcon.GetComponent<RectTransform>();
-        transform.SetParent(parent);
-        transform.anchoredPosition = new(-5f, -5f);
-        transform.anchorMin = transform.anchorMax = Vector2.one;
-        transform.sizeDelta = new(16f, 16f);
-        subIcon.SetActive(ShouldBeMarked(item));
+        if(Icon != null)
+        {
+            Image image = subIcon.AddComponent<Image>();
+            image.sprite = Icon;
+            image.color = new(1f, 1f, 0f, 1f);
+            RectTransform transform = subIcon.GetComponent<RectTransform>();
+            transform.SetParent(parent);
+            transform.anchoredPosition = new(-5f, -5f);
+            transform.anchorMin = transform.anchorMax = Vector2.one;
+            transform.sizeDelta = new(16f, 16f);
+            subIcon.SetActive(ShouldBeMarked(item));
+        }
         _items.Add(slut);
     }
 
