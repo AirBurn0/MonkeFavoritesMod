@@ -2,7 +2,7 @@ using HarmonyLib;
 using MonkeFavoritesMod.Helpers;
 
 namespace MonkeFavoritesMod.Patches;
-// AmmoSlot
+
 [HarmonyPatch(typeof(ItemSlot))]
 class ItemSlotPatch
 {

@@ -39,12 +39,13 @@ public static class FavoritesHelper
         {
             Image image = subIcon.AddComponent<Image>();
             image.sprite = Icon;
-            image.color = new(1f, 1f, 0f, 1f);
+            image.color = new(1.0F, 1.0F, 0.0F, 1.0F);
             RectTransform transform = subIcon.GetComponent<RectTransform>();
-            transform.SetParent(parent);
-            transform.anchoredPosition = new(-5f, -5f);
+            transform.SetParent(parent, false);
+            transform.pivot = Vector2.zero;
+            transform.anchoredPosition = new(-8.0F, -7.0F);
             transform.anchorMin = transform.anchorMax = Vector2.one;
-            transform.sizeDelta = new(16f, 16f);
+            transform.sizeDelta = new(7.0F, 6.0F);
             subIcon.SetActive(ShouldBeMarked(item));
         }
         _items.Add(slut);
