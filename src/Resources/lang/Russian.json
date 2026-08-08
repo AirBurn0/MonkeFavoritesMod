@@ -1,4 +1,5 @@
 {
-	"ui.context.AddFavorite": "Добавить в Избранное",
-	"ui.context.RemoveFavorite": "Убрать из Избранного"
+	"ui.context.AddFavorite": "Добавить в избранное",
+	"ui.context.RemoveFavorite": "Убрать из избранного",
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Переключить избранное"
 }

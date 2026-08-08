@@ -1,4 +1,5 @@
 {
 	"ui.context.AddFavorite": "즐겨찾기에 추가",
-	"ui.context.RemoveFavorite": "즐겨찾기에서 삭제"
+	"ui.context.RemoveFavorite": "즐겨찾기에서 삭제",
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "즐겨찾기 토글"
 }

@@ -1,4 +1,5 @@
 {
 	"ui.context.AddFavorite": "Favoriten",
-	"ui.context.RemoveFavorite": "Unfavoriten"
+	"ui.context.RemoveFavorite": "Unfavoriten",
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Favoriten umschalten"
 }
