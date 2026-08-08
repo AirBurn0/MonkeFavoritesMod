@@ -10,7 +10,7 @@ namespace MonkeFavoritesMod.Patches;
 [HarmonyPatch(typeof(Localization))]
 class LocalizationPatch
 {
-    [HarmonyPatch("LoadDB"), HarmonyPostfix]
+    [HarmonyPatch(nameof(Localization.LoadDB)), HarmonyPostfix]
     static void LoadDBPostfix(Dictionary<Localization.Lang, Dictionary<string, string>> ___db)
     {
         foreach (Localization.Lang lang in Enum.GetValues(typeof(Localization.Lang)))

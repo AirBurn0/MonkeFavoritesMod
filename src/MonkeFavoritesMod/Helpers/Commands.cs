@@ -12,7 +12,7 @@ class Commands
         if(Id is null)
             return;
         CommonContextMenu contextMenu = UI.Get<CommonContextMenu>();
-        if (!FavoritesHelper.ShouldBeMarked(Id)) 
+        if (!FavoritesHelper.IsFavorite(Id)) 
             contextMenu.SetupCommand(Localization.Get($"ui.context.{nameof(AddFavorite)}"), AddFavorite);
         else
             contextMenu.SetupCommand(Localization.Get($"ui.context.{nameof(RemoveFavorite)}"), RemoveFavorite);

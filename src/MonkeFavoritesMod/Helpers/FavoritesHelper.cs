@@ -46,17 +46,17 @@ public static class FavoritesHelper
             transform.anchoredPosition = new(-8.0F, -7.0F);
             transform.anchorMin = transform.anchorMax = Vector2.one;
             transform.sizeDelta = new(7.0F, 6.0F);
-            subIcon.SetActive(ShouldBeMarked(item));
+            subIcon.SetActive(IsFavorite(item));
         }
         _items.Add(slut);
     }
 
     public static void SetSubIconActive(GameObject slut, string? item)
     {
-        slut.GetComponent<RectTransform>().Find("SubIcon").gameObject?.SetActive(ShouldBeMarked(item));
+        slut.GetComponent<RectTransform>().Find("SubIcon").gameObject?.SetActive(IsFavorite(item));
     }
 
-    public static bool ShouldBeMarked(string? item)
+    public static bool IsFavorite(string? item)
     {
         return item is not null && (_favorites?.Contains(item) ?? false);
     }
@@ -77,6 +77,14 @@ public static class FavoritesHelper
             _favorites?.Remove(item);
             Refresh(item);
         }
+    }
+
+    public static void ToggleFavorite(string id)
+    {
+        if(IsFavorite(id))
+            RemoveFavorite(id);
+        else
+            AddFavorite(id);
     }
 
     private static void Refresh(string itemName)

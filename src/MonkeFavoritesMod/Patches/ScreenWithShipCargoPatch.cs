@@ -7,13 +7,13 @@ namespace MonkeFavoritesMod.Patches;
 class ScreenWithShipCargoPatch
 {
 
-    [HarmonyPatch("DragControllerShowContextMenuCallback"), HarmonyPostfix]
+    [HarmonyPatch(nameof(ScreenWithShipCargo.DragControllerShowContextMenuCallback)), HarmonyPostfix]
     static void DragControllerShowContextMenuCallbackPostfix(ItemSlot obj)
     {
         Commands.SetupModCommands(obj?.Item?.Id);
     }
 
-    [HarmonyPatch("ContextMenuOnCmdSelected"), HarmonyPrefix]
+    [HarmonyPatch(nameof(ScreenWithShipCargo.ContextMenuOnCmdSelected)), HarmonyPrefix]
     static bool ContextMenuOnCmdSelectedPrefix(ScreenWithShipCargo __instance, int bindValue)
     {
         return Commands.ExecuteModCommands(__instance?._contextMenuItemSlot?.Item?.Id, bindValue);
