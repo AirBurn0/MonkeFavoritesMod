@@ -1,5 +1,8 @@
 {
 	"ui.context.AddFavorite": "Favoriten",
 	"ui.context.RemoveFavorite": "Unfavoriten",
-	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Favoriten umschalten"
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Favoriten umschalten",
+	"mcm.MonkeFavoritesMod.header_sort": "Bestandssortierung",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort": "Messy Favorites–Erste Sortierung",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort.desc": "Die als Favoriten markierten Elemente werden nach dem Sortieren zuerst angezeigt. Die Reihenfolge kann dadurch fehlerhaft sein."
 }

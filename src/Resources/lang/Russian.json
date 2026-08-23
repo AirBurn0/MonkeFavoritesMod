@@ -1,5 +1,8 @@
 {
 	"ui.context.AddFavorite": "Добавить в избранное",
 	"ui.context.RemoveFavorite": "Убрать из избранного",
-	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Переключить избранное"
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Переключить избранное",
+	"mcm.MonkeFavoritesMod.header_sort": "Сортировка инвентаря",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort": "Неряшливая \"Сначала избранное\" сортировка",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort.desc": "Предметы, помеченные как избранные, будут отображаться первыми после сортировки. Результат может быть плохо упорядочен."
 }

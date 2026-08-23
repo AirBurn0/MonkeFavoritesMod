@@ -2,5 +2,8 @@
 	"ui.controls.MonkeFavoritesMod": "MonkeFavoritesMod",
 	"ui.context.AddFavorite": "Favorite",
 	"ui.context.RemoveFavorite": "Unfavorite",
-	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Toggle favorite"
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Toggle favorite",
+	"mcm.MonkeFavoritesMod.header_sort": "Inventory sorting",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort": "Messy Favorites-First sort",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort.desc": "Will make Favorite-marked items appear first after sorting. Result may be bad-ordered."
 }

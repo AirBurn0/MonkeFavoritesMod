@@ -1,5 +1,8 @@
 {
 	"ui.context.AddFavorite": "Favorito",
 	"ui.context.RemoveFavorite": "Não favorito",
-	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Alternar favorito"
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Alternar favorito",
+	"mcm.MonkeFavoritesMod.header_sort": "Ordenar de inventário",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort": "Bagunçados Favoritos-Primeira ordenar",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort.desc": "Os itens marcados como favoritos aparecerão primeiro após a ordenação. O resultado pode ficar desordenado."
 }

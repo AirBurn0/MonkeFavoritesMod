@@ -4,7 +4,7 @@
         <LangVersion>latestmajor</LangVersion>
         <Nullable>enable</Nullable>
         <ModID>3404205113</ModID>
-        <SteamDir>D:\Steam\</SteamDir>
+        <SteamDir>C:\Steam\</SteamDir>
         <RefsDir>$(SteamDir)steamapps\common\Quasimorph\Quasimorph_Data\Managed\</RefsDir>
         <ModDir>$(SteamDir)steamapps\workshop\content\2059170\$(ModID)\</ModDir>
     </PropertyGroup>
@@ -31,5 +31,7 @@
         <Reference Include="UnityEngine.UI" HintPath="$(RefsDir)UnityEngine.UI.dll" Private="false"/>
         <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(RefsDir)UnityEngine.InputLegacyModule.dll" Private="false"/>
         <Reference Include="SimpleJSON" HintPath="$(RefsDir)SimpleJSON.dll" Private="false"/>
+        <Reference Include="Newtonsoft.Json" HintPath="$(RefsDir)Newtonsoft.Json.dll" Private="false"/>
+        <Reference Include="MCM" HintPath="../lib/MCM.dll"/>
     </ItemGroup>
 </Project>

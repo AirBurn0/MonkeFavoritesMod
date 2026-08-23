@@ -1,5 +1,8 @@
 {
 	"ui.context.AddFavorite": "お気に入りに",
 	"ui.context.RemoveFavorite": "お気に入りから削除",
-	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "お気に入りを切り替える"
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "お気に入りを切り替える",
+	"mcm.MonkeFavoritesMod.header_sort": "在庫の仕分け",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort": "乱雑な「お気に入り優先」ソート",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort.desc": "お気に入りとしてマークしたアイテムが、並べ替え後に最初に表示されます。結果的に表示順が崩れる場合があります。"
 }

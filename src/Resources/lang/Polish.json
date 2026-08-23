@@ -1,5 +1,8 @@
 {
 	"ui.context.AddFavorite": "Dodaj do ulubionych",
 	"ui.context.RemoveFavorite": "Usuń z ulubionych",
-	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Przełącz ulubionych"
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Przełącz ulubionych",
+	"mcm.MonkeFavoritesMod.header_sort": "Ekwipunek sortuj",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort": "Bałagany Ulubione–Pierwsze sortowanie",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort.desc": "Spowoduje, że elementy oznaczone jako Ulubione będą wyświetlane jako pierwsze po sortowaniu. Wynik może być nieprawidłowo uporządkowany."
 }

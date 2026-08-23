@@ -1,5 +1,8 @@
 {
 	"ui.context.AddFavorite": "Favorilere ekle",
 	"ui.context.RemoveFavorite": "Favorilerden kaldır",
-	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Favorileri değiştir"
+	"gamekey.MonkeFavoritesMod_ToggleFavorite.desc": "Favorileri değiştir",
+	"mcm.MonkeFavoritesMod.header_sort": "Envanter sıralama",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort": "Dağınık Sırala Favoriler-Önce",
+	"mcm.MonkeFavoritesMod.messyFavoritesFristSort.desc": "Favori olarak işaretlenmiş öğeler sıralamadan sonra ilk sırada görünecektir. Sonuç hatalı sıralanmış olabilir."
 }

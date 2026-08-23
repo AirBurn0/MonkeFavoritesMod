@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 using HarmonyLib;
+using MonkeFavoritesMod.Compatibility;
 using MonkeFavoritesMod.Helpers;
 
 namespace MonkeFavoritesMod;
@@ -8,7 +9,6 @@ namespace MonkeFavoritesMod;
 public static class MonkeFavoritesMod
 {
     public static string ModName = "MonkeFavoritesMod";
-
     
     [Hook(ModHookType.BeforeBootstrap)]
     public static void BeforeBootstrap(IModContext context)
@@ -20,7 +20,6 @@ public static class MonkeFavoritesMod
     [Hook(ModHookType.AfterConfigsLoaded)]
     public static void AfterConfigsLoaded(IModContext context)
     {
-        // foreach(var rr in MGSC.Data.Keybinding.Records.ToArray().Skip(1)) MGSC.Data.Keybinding.RemoveRecord(rr.Id);
         GameKeyRecord r = new()
         {
             Id = Hotkeys.TOGGLE_FAVORITE,
@@ -35,6 +34,13 @@ public static class MonkeFavoritesMod
             OtherKeyIdToPress = ""
         };
         MGSC.Data.Keybinding.AddRecord(r.Id, r);
+        if(HasMod("Crynano_ModConfigMenu"))
+            MCMCompat.Init();
+    }
+
+    private static bool HasMod(string uniqueModName)
+    {
+        return UserModSystem._userModsCached.Values.Any(userMod => userMod.UniqueModName.Equals(uniqueModName));
     }
     
 }
