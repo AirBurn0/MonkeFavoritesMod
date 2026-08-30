@@ -10,7 +10,7 @@
     </PropertyGroup>
     <Target Name="CopyOutput" AfterTargets="Build">
         <ItemGroup>
-            <ModFiles Include="$(TargetDir)**\*.*" Exclude="$(TargetDir)BepInEx.AssemblyPublicizer*.dll;$(TargetDir)AsmResolver*.dll;$(TargetDir)*.pdb" />
+            <ModFiles Include="$(TargetDir)**\*.*" Exclude="$(TargetDir)BepInEx.AssemblyPublicizer*.dll;$(TargetDir)AsmResolver*.dll;$(TargetDir)0Harmony*.dll;$(TargetDir)*.pdb" />
         </ItemGroup>
         <Copy SourceFiles="@(ModFiles)" DestinationFolder="$(ModDir)%(RecursiveDir)" SkipUnchangedFiles="false"/>
     </Target>
@@ -20,7 +20,7 @@
         <Content Include="Resources\**" Link="%(RecursiveDir)\%(FileName)%(Extension)" CopyToOutputDirectory="Always" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Lib.Harmony" Version="2.3.3" />
+        <PackageReference Include="Lib.Harmony" Version="2.3.3"/>
         <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" PrivateAssets="all" />
     </ItemGroup>
     <ItemGroup>
@@ -32,6 +32,6 @@
         <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(RefsDir)UnityEngine.InputLegacyModule.dll" Private="false"/>
         <Reference Include="SimpleJSON" HintPath="$(RefsDir)SimpleJSON.dll" Private="false"/>
         <Reference Include="Newtonsoft.Json" HintPath="$(RefsDir)Newtonsoft.Json.dll" Private="false"/>
-        <Reference Include="MCM" HintPath="../lib/MCM.dll"/>
+        <Reference Include="MCM" HintPath="../lib/MCM.dll" Private="false"/>
     </ItemGroup>
 </Project>
